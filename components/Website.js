@@ -1,12 +1,27 @@
-'use client'  // Add this at the very top of the file
+'use client'
 
 import React, { useState } from 'react';
 import { Menu, X, ChevronDown, ChevronUp, Check, Mail, Phone, MapPin } from 'lucide-react';
 
-// Rest of your component code stays exactly the same...
+const Website = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const [expandedFaqs, setExpandedFaqs] = useState({});
 
-import React, { useState } from 'react';
-import { Menu, X, ChevronDown, ChevronUp, Check, Mail, Phone, MapPin } from 'lucide-react';
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  
+  const toggleFaq = (id) => {
+    setExpandedFaqs(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
+  // Your component's code continues here...
+};
+
+export default Website;
+
 
 const Website = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
