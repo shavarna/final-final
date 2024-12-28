@@ -1,42 +1,21 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react';
-import { Menu, X, ChevronDown, ChevronUp, Check, Mail, Phone, MapPin } from 'lucide-react';
-
-const Website = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-  const [expandedFaqs, setExpandedFaqs] = useState({});
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  
-  const toggleFaq = (id) => {
-    setExpandedFaqs(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
-
-  // Your component's code continues here...
-};
-
-export default Website;
-
+import React, { useState } from "react";
+import { Menu, X, ChevronDown, ChevronUp, Check, Mail, Phone, MapPin } from "lucide-react";
 
 const Website = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState("home");
   const [expandedFaqs, setExpandedFaqs] = useState({});
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  
+
   const toggleFaq = (id) => {
-    setExpandedFaqs(prev => ({
+    setExpandedFaqs((prev) => ({
       ...prev,
-      [id]: !prev[id]
+      [id]: !prev[id],
     }));
   };
-
   const faqs = [
     {
       id: 1,
