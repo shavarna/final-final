@@ -1,3 +1,10 @@
+'use client'  // Add this at the very top of the file
+
+import React, { useState } from 'react';
+import { Menu, X, ChevronDown, ChevronUp, Check, Mail, Phone, MapPin } from 'lucide-react';
+
+// Rest of your component code stays exactly the same...
+
 import React, { useState } from 'react';
 import { Menu, X, ChevronDown, ChevronUp, Check, Mail, Phone, MapPin } from 'lucide-react';
 
