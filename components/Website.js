@@ -98,7 +98,7 @@ const Website = () => {
         {/* Hero Section */}
         {activeSection === 'home' && (
           <div className="text-center py-16">
-            <h1 className="text-4xl font-bold mb-4">Advanced Semiconductor Consulting Solutions</h1>
+            <h1 className="text-4xl font-bold mb-4">Advance Semiconductor Consulting Solutions</h1>
             <p className="text-xl text-gray-600 mb-8">Empowering innovation in automotive, AI/ML, and IoT technologies</p>
             <button onClick={() => setActiveSection('contact')} className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700">
               Get Started
