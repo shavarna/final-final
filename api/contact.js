@@ -1,32 +1,34 @@
-import nodemailer from 'nodemailer';
+import { MongoClient } from "mongodb";
 
-export default async (req, res) => {
-  if (req.method === 'POST') {
-    const { name, email, message } = req.body;
+const uri = process.env.MONGODB_URI; // Environment variable
+const client = new MongoClient(uri);
 
+export default async function handler(req, res) {
+  if (req.method === "POST") {
     try {
-      // Send email using nodemailer
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'YOUR_EMAIL@gmail.com',
-          pass: 'YOUR_EMAIL_PASSWORD',
-        },
-      });
+      const { name, email, message } = req.body;
 
-      await transporter.sendMail({
-        from: 'YOUR_EMAIL@gmail.com',
-        to: 'RECEIVING_EMAIL@gmail.com',
-        subject: 'New Contact Form Submission',
-        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-      });
+      // Validate input
+      if (!name || !email || !message) {
+        return res.status(400).json({ error: "All fields are required." });
+      }
 
-      res.status(200).json({ success: true, message: 'Form submitted successfully!' });
+      // Connect to MongoDB
+      await client.connect();
+      const db = client.db("coreSilicon");
+      const collection = db.collection("contacts");
+
+      // Insert into the collection
+      await collection.insertOne({ name, email, message, createdAt: new Date() });
+
+      res.status(200).json({ success: true, message: "Message saved!" });
     } catch (error) {
-      console.error('Error sending email:', error);
-      res.status(500).json({ success: false, message: 'Server error. Please try again.' });
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    } finally {
+      await client.close();
     }
   } else {
-    res.status(405).json({ message: 'Method not allowed' });
+    res.status(405).json({ error: "Method not allowed" });
   }
-};
+}
